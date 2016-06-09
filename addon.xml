@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<addon id="plugin.video.LR.clean_remove" name="Clean Remove" version="1.0.1" provider-name="Luis Rodrigues">
+	<requires>
+		<import addon="xbmc.python" version="2.1.0"/>
+	</requires>
+	<extension point="kodi.context.item">
+		<item library="addon.py">
+			<label>30001</label>
+			<visible>StringCompare(Container.Content,movies) | StringCompare(Container.Content,episodes) | StringCompare(Container.Content,musicvideos) | StringCompare(Container.Content,files)</visible>
+		</item>
+	</extension>
+	<extension point="xbmc.addon.metadata">
+		<summary lang="en_gb">Clean Remove</summary>
+		<description lang="en_gb">Removes item from library and disk, together with fanart and subtitles. No more orphan files left behind after Remove from library</description>
+		<disclaimer lang="en_gb">I am not responsible if your house is on fire, if your kodi runs away with another kodi or anything else that may happen</disclaimer>
+		<language></language>
+		<platform>all</platform>
+		<license>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</license>
+		<forum></forum>
+		<website></website>
+		<email></email>
+		<source>https://github.com/rodrigl/plugin.video.LR.last_viewed</source>
+	</extension>
+</addon>

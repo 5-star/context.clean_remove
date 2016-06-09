@@ -1,0 +1,26 @@
+msgid ""
+msgstr ""
+
+msgctxt "#30001"
+msgid "Clean Remove"
+msgstr ""
+
+msgctxt "#30002"
+msgid "Movie Deleted"
+msgstr ""
+
+msgctxt "#30003"
+msgid "Episode Deleted"
+msgstr ""
+
+msgctxt "#30004"
+msgid "Music Video Deleted"
+msgstr ""
+
+msgctxt "#30005"
+msgid "Video Deleted"
+msgstr ""
+
+msgctxt "#30006"
+msgid "Clean Remove (it can not be undone!)"
+msgstr ""
