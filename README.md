@@ -1,5 +1,5 @@
-plugin.video.LR.clean_remove
-----------------------------
+context.clean_remove
+--------------------
 
 A Kodi add-on to delete a movie or episode or video cleanly, without leaving behind orphan files.
 

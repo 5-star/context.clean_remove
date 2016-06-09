@@ -4,7 +4,9 @@ import sys
 import json
 import xbmc
 import xbmcgui
+import xbmcaddon
 
+addon = xbmcaddon.Addon()
 lang = addon.getLocalizedString
 
 def kodiJsonRequest(params):
@@ -63,5 +65,6 @@ def trata():
         if xbmc.getInfoLabel('Container.Content')=='files': trataVideos()
  
 if __name__ == '__main__':
+    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30005))
     if xbmc.getInfoLabel('ListItem.FileName')!="":
         trata()
