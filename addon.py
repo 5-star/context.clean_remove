@@ -5,6 +5,7 @@ import json
 import xbmc
 import xbmcgui
 import xbmcaddon
+import ctypes
 
 addon = xbmcaddon.Addon()
 lang = addon.getLocalizedString
@@ -24,47 +25,59 @@ def kodiJsonRequest(params):
         logger.warn("[%s] %s" % (params['method'], response['error']['message']))
         return None
 
+def deleteFile(file):
+    if os.path.isfile(file): 
+        os.remove(file)
 
-def trataMovie():
-    for fl in glob.glob(path + "*.*"): os.remove(fl)
-    try: os.rmdir(path)
-    except: logger.warn('not empty, keep folder')
+def deleteDir(dir):
+    if os.path.exists(dir): 
+        if os.listdir(dir) == []:    
+            os.rmdir(dir)
+
+def deleteVideo(path, video):
+    deleteFile(path + video)
+    base = os.path.splitext(video)[0]
+    pathbase = path + base
+    deleteFile(pathbase + ".jpg")
+    deleteFile(pathbase + ".srt")
+    deleteFile(pathbase + ".nfo")
+    deleteFile(pathbase + "-poster.jpg")
+    deleteFile(pathbase + "-thumb.jpg")
+    deleteDir(path)
+			
+def trataMovie(id, path, video):
     kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMovie', 'params': {'movieid': int(id)}, 'id': 1})
-    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30002))
+    for fl in glob.glob(path + "*.*"): os.remove(fl)
+    deleteDir(path)
+    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30002) + ')')
 
-def trataEpisode():
-    base = os.path.splitext(xbmc.getInfoLabel('ListItem.FileName'))[0]
+def trataEpisode(id, path, video):
     kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveEpisode', 'params': {'episodeid': int(id)}, 'id': 1})
-    for fl in glob.glob(path + base + "*.*"): os.remove(fl)
-    try: os.rmdir(path)
-    except: logger.warn('not empty, keep folder')
-    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30003))
+    deleteVideo(path, video)
+    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30003) + ')')
 
-def trataMusicVideos():
-    base = os.path.splitext(xbmc.getInfoLabel('ListItem.FileName'))[0]
+def trataMusicVideos(id, path, video):
     kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMusicVideo', 'params': {'musicvideoid': int(id)}, 'id': 1})
-    for fl in glob.glob(path + base + "*.*"): os.remove(fl)
-    try: os.rmdir(path)
-    except: logger.warn('not empty, keep folder')
-    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30004))
+    deleteVideo(path, video)
+    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30004) + ')')
 
-def trataVideos():
-    base = os.path.splitext(xbmc.getInfoLabel('ListItem.FileName'))[0]
-    for fl in glob.glob(path + base + "*.*"): os.remove(fl)
-    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30005))
+def trataVideos(path, video):
+    deleteVideo(path, video)
+    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30005) + ')')
 
 def trata():
     id=xbmc.getInfoLabel('ListItem.DBID')
     if id=='-1':
         id=xbmc.getInfoLabel('ListItem.title')
-    path=xbmc.getInfoLabel('ListItem.Path').replace('smb:','')
     if xbmcgui.Dialog().yesno(lang(30006),xbmc.getInfoLabel('ListItem.Label')):
-        if xbmc.getInfoLabel('Container.Content')=='movies': trataMovie()
-        if xbmc.getInfoLabel('Container.Content')=='episodes': trataEpisode()
-        if xbmc.getInfoLabel('Container.Content')=='musicvideos': trataMusicVideos()
-        if xbmc.getInfoLabel('Container.Content')=='files': trataVideos()
+        path=xbmc.getInfoLabel('ListItem.Path').replace('smb:','')
+        video = xbmc.getInfoLabel('ListItem.FileName')
+        if xbmc.getInfoLabel('Container.Content')=='movies': trataMovie(id, path, video)
+        if xbmc.getInfoLabel('Container.Content')=='episodes': trataEpisode(id, path, video)
+        if xbmc.getInfoLabel('Container.Content')=='musicvideos': trataMusicVideos(id, path, video)
+        if xbmc.getInfoLabel('Container.Content')=='files': trataVideos(path, video)
  
 if __name__ == '__main__':
-    xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30005))
+    #ctypes.windll.user32.MessageBoxA(0, addon.getAddonInfo('path'), "Your title", 1)
     if xbmc.getInfoLabel('ListItem.FileName')!="":
         trata()
