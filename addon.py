@@ -5,6 +5,7 @@ import json
 import xbmc
 import xbmcgui
 import xbmcaddon
+import xbmcvfs
 import ctypes
 
 addon = xbmcaddon.Addon()
@@ -26,29 +27,28 @@ def kodiJsonRequest(params):
         return None
 
 def deleteFile(file):
-    xbmc.executebuiltin('Notification(' + file + ',' + file + ')')
-    if os.path.isfile(file): 
-        os.remove(file)
+    if xbmcvfs.exists(file):
+        xbmcvfs.delete(file)
 
 def deleteDir(dir):
-    if os.path.exists(dir): 
-        if os.listdir(dir) == []:    
-            os.rmdir(dir)
+    if xbmcvfs.exists(dir):
+        files=xbmcvfs.listdir(dir)
+        if len(files)==2:
+            xbmcvfs.rmdir(dir)
 
 def deleteVideo(path, video):
     deleteFile(path + video)
-    base = os.path.splitext(video)[0]
-    pathbase = path + base
-    deleteFile(pathbase + ".jpg")
-    deleteFile(pathbase + ".srt")
-    deleteFile(pathbase + ".nfo")
-    deleteFile(pathbase + "-poster.jpg")
-    deleteFile(pathbase + "-thumb.jpg")
+    filebase = path + os.path.splitext(video)[0]
+    deleteFile(filebase + ".jpg")
+    deleteFile(filebase + ".srt")
+    deleteFile(filebase + ".nfo")
+    deleteFile(filebase + "-poster.jpg")
+    deleteFile(filebase + "-thumb.jpg")
     deleteDir(path)
 			
 def trataMovie(id, path, video):
     kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMovie', 'params': {'movieid': int(id)}, 'id': 1})
-    for fl in glob.glob(path + "*.*"): os.remove(fl)
+    for fl in xbmcvfs.listdir(path): xbmcvfs.remove(fl)
     deleteDir(path)
     xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30002) + ')')
 
@@ -71,7 +71,7 @@ def trata():
     if id=='-1':
         id=xbmc.getInfoLabel('ListItem.title')
     if xbmcgui.Dialog().yesno(lang(30006),xbmc.getInfoLabel('ListItem.Label')):
-        path=xbmc.getInfoLabel('ListItem.Path').replace('smb:','')
+        path=xbmc.getInfoLabel('ListItem.Path')
         video = xbmc.getInfoLabel('ListItem.FileName')
         if xbmc.getInfoLabel('Container.Content')=='movies': trataMovie(id, path, video)
         if xbmc.getInfoLabel('Container.Content')=='episodes': trataEpisode(id, path, video)
