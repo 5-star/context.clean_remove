@@ -26,6 +26,7 @@ def kodiJsonRequest(params):
         return None
 
 def deleteFile(file):
+    xbmc.executebuiltin('Notification(' + file + ',' + file + ')')
     if os.path.isfile(file): 
         os.remove(file)
 
