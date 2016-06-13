@@ -39,16 +39,21 @@ def deleteDir(dir):
 def deleteVideo(path, video):
     deleteFile(path + video)
     filebase = path + os.path.splitext(video)[0]
-    deleteFile(filebase + ".jpg")
     deleteFile(filebase + ".srt")
+    deleteFile(filebase + "..srt")
+    deleteFile(filebase + ".pt.srt")
+    deleteFile(filebase + ".en.srt")
     deleteFile(filebase + ".nfo")
+    deleteFile(filebase + ".jpg")
     deleteFile(filebase + "-poster.jpg")
     deleteFile(filebase + "-thumb.jpg")
     deleteDir(path)
 			
 def trataMovie(id, path, video):
     kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMovie', 'params': {'movieid': int(id)}, 'id': 1})
-    for fl in xbmcvfs.listdir(path): xbmcvfs.remove(fl)
+    xdir, xfil = xbmcvfs.listdir(path)
+    for fl in xfil:
+        xbmcvfs.delete(path + fl)
     deleteDir(path)
     xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30002) + ')')
 
@@ -68,8 +73,7 @@ def trataVideos(path, video):
 
 def trata():
     id=xbmc.getInfoLabel('ListItem.DBID')
-    if id=='-1':
-        id=xbmc.getInfoLabel('ListItem.title')
+    if id=='-1': id=sys.listitem.getProperty('idx')
     if xbmcgui.Dialog().yesno(lang(30006),xbmc.getInfoLabel('ListItem.Label')):
         path=xbmc.getInfoLabel('ListItem.Path')
         video = xbmc.getInfoLabel('ListItem.FileName')
