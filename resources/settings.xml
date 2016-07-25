@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<settings>
+    <setting id="separate_movies" label="30007" type="bool" default="false" />
+    <setting id="remove_empty" label="30008" type="bool" default="true" />
+</settings>
+

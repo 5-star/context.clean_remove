@@ -24,3 +24,11 @@ msgstr ""
 msgctxt "#30006"
 msgid "Clean Remove (it can not be undone!)"
 msgstr ""
+
+msgctxt "#30007"
+msgid "Movies in separate folders"
+msgstr ""
+
+msgctxt "#30008"
+msgid "Remove empty folders"
+msgstr ""

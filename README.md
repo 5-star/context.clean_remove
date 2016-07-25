@@ -3,21 +3,19 @@ context.clean_remove
 
 A Kodi add-on to delete a movie or episode or video cleanly, without leaving behind orphan files.
 
+The kodi "Remove from library" is a nice feature, but only deletes the movie being played. After I started using it, I noticed that I had to manually delete the fanart, the nfo and the subtitles. Or instead ending up with a disk full of unsused garbish.  
+So I came upo with this clean remove, a library removal tool that removes the media and all related files.
+
 I have been using this for quite a while without any problems, so I am sharing it for public use. USE IT AT YOUR OWN RISK.
 It will work well only if you kept the default naming terminology and paths for fanart and subtitles. Please see below for more details.
 
 WARNING!!!
-Only use this addon if you have movie on separate folders, one movie per folder. When you delete one movie it will remove the movie from library and then delete the folder where the movie is, this way deleting all files related to that movie.
-If you have all the movies in one single folder, deleting one movie will delete them all.
+Pay attention to the setting "Movies in separate folders". If this is true, when you delete one movie it will remove the movie from the library and then delete the folder where the movie is, this way deleting all files related to that movie.
+If you have all the movies in one single folder and set the 'Movies in separate folders', deleting one movie will delete them all. Use this option only if you have movies on separate folders, one movie per folder. 
 
-Deleting a tvshow episode will remove it from the library and then delete the episode file and related files withe the same 'root' name.
-Example: Deleting an episode with a filename abc.mp4, will delete all files that start with 'abc' on the folder where the episode is.
-This way it will delete abc.mp4, abc.nfo, abc-thumb.jpg and abc.srt.
-If it was the last episode on the season and folder, it will delete the folder if it's empty.
+For all other media types (episodes, music videos and videos) this will only delete the fanart, nfo and subtitles related to the media being removed form the library. Everything else on the same folder is not touched.
 
-Music Videos behaves just like the episodes, removing the music video from the library and then deleting the video file and any othr files with the same 'root' file name on the folder of the video.
-
-For videos not in the library, it will just delete the video and related fanart and subtitles with the same 'root' name, just like the tvshow episodes.
+Optionally, if it was the last episode on the season/folder, it will delete the folder if it's empty.
 
 Installation
 ------------
@@ -29,4 +27,4 @@ Installation
  
 Release history
 ---------------
-  * 2016-06-10 v 1.0.1 Initial release
+  * 1.0.1 Initial release
