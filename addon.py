@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 import os
 import glob
 import sys
@@ -80,14 +81,19 @@ def dltVideos(path, video):
 	xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30005) + ')')
 
 def dlt():
-	id=xbmc.getInfoLabel('ListItem.DBID')
 	if xbmcgui.Dialog().yesno(lang(30006),xbmc.getInfoLabel('ListItem.Label')):
 		path=xbmc.getInfoLabel('ListItem.Path')
 		video = xbmc.getInfoLabel('ListItem.FileName')
-		if xbmc.getInfoLabel('Container.Content')=='movies': dltMovie(id, path, video)
-		if xbmc.getInfoLabel('Container.Content')=='episodes': dltEpisode(id, path, video)
-		if xbmc.getInfoLabel('Container.Content')=='musicvideos': dltMusicVideos(id, path, video)
-		if xbmc.getInfoLabel('Container.Content')=='files': dltVideos(path, video)
+		if xbmc.getInfoLabel('Container.Content')=='files':
+			dltVideos(path, video)
+		else:
+			id=int(xbmc.getInfoLabel('ListItem.DBID'))
+			if id<0: id=int(xbmc.getInfoLabel('ListItem.Top250'));
+			if id>0:
+				dbtype = xbmc.getInfoLabel('ListItem.DBTYPE')
+				if dbtype=='movie': dltMovie(id, path, video)
+				elif dbtype=='episode': dltEpisode(id, path, video)
+				elif dbtype=='musicvideo': dltMusicVideos(id, path, video)
  
 if __name__ == '__main__':
 	if xbmc.getInfoLabel('ListItem.FileName')!="":
