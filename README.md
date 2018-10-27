@@ -17,6 +17,18 @@ For all other media types (episodes, music videos and videos) this will only del
 
 Optionally, if it was the last episode on the season/folder, it will delete the folder if it's empty.
 
+Files with the following extensions and the same name as the movie/episode are deleted:
+".srt"
+".pt.srt"
+".en.srt"
+".nfo"
+".jpg"
+"-poster.jpg"
+"-fanart.jpg"
+"-thumb.jpg"
+"-banner.jpg"
+"-thumb.jpg"
+
 Installation
 ------------
 
@@ -27,4 +39,5 @@ Installation
  
 Release history
 ---------------
+  * 1.0.2 Update to Kodi 18
   * 1.0.1 Initial release
