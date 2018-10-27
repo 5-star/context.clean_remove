@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="context.clean_remove" name="Clean Remove" version="1.0.1" provider-name="Luis Rodrigues">
+<addon id="context.clean_remove" name="Clean Remove" version="1.0.2" provider-name="Luis Rodrigues">
 	<requires>
 		<import addon="xbmc.python" version="2.1.0"/>
 	</requires>	
@@ -7,7 +7,7 @@
 		<menu id="kodi.core.main">
 			<item library="addon.py">
 				<label>30001</label>
-				<visible>StringCompare(Container.Content,movies) | StringCompare(Container.Content,episodes) | StringCompare(Container.Content,musicvideos) | StringCompare(Container.Content,files)</visible>
+				<visible>String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,musicvideo) | String.IsEqual(Container.Content,files)</visible>
 			</item>
 		</menu>
 	</extension>
@@ -21,6 +21,6 @@
 		<forum></forum>
 		<website></website>
 		<email></email>
-		<source>https://github.com/rodrigl/plugin.video.LR.last_viewed</source>
+		<source>https://github.com/5-star/context.clean_remove</source>
 	</extension>
 </addon>
