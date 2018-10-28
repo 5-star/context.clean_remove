@@ -12,9 +12,9 @@
 		</menu>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary lang="en_gb">Clean Remove</summary>
-		<description lang="en_gb">Removes item from library and disk, together with fanart and subtitles. No more orphan files left behind after Remove from library</description>
-		<disclaimer lang="en_gb"></disclaimer>
+		<summary lang="en_US">Clean Remove</summary>
+		<description lang="en_US">Removes item from library and disk, together with fanart and subtitles. No more orphan files left behind after Remove from library</description>
+		<disclaimer lang="en_US"></disclaimer>
 		<language></language>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</license>
