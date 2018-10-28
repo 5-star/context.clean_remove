@@ -96,6 +96,4 @@ def dlt():
 				elif dbtype=='musicvideo': dltMusicVideos(id, path, video)
  
 if __name__ == '__main__':
-	xbmc.log("EEEEEEEEEEEEEEEEEEEEE"+xbmc.getInfoLabel('ListItem.DBTYPE'),3)
-	if xbmc.getInfoLabel('ListItem.FileName')=="SSSSSSSSSSSSSS":
-		dlt()
+	dlt()
