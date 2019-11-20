@@ -7,6 +7,7 @@ import xbmc
 import xbmcgui
 import xbmcaddon
 import xbmcvfs
+import re
 
 addon = xbmcaddon.Addon()
 lang = addon.getLocalizedString
@@ -41,10 +42,13 @@ def deleteDir(dir):
 
 def deleteVideo(path, video):
 	deleteFile(path + video)
-	filebase = path + os.path.splitext(video)[0]
+        filename = os.path.splitext(video)[0]
+	filebase = path + filename
+        xdir, xfil = xbmcvfs.listdir(path)
+        for fl in xfil:
+            if re.fullmatch(re.escape(filename) + "[a-z]{2}\.srt", fl):
+	        xbmcvfs.delete(path + fl)
 	deleteFile(filebase + ".srt")
-	deleteFile(filebase + ".pt.srt")
-	deleteFile(filebase + ".en.srt")
 	deleteFile(filebase + ".nfo")
 	deleteFile(filebase + ".jpg")
 	deleteFile(filebase + "-poster.jpg")
