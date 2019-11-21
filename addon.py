@@ -46,7 +46,7 @@ def deleteVideo(path, video):
 	filebase = path + filename
         xdir, xfil = xbmcvfs.listdir(path)
         for fl in xfil:
-            if re.fullmatch(re.escape(filename) + "[a-z]{2}\.srt", fl):
+            if re.match(re.escape(filename) + "[a-z]{2}\.srt$", fl):
 	        xbmcvfs.delete(path + fl)
 	deleteFile(filebase + ".srt")
 	deleteFile(filebase + ".nfo")
