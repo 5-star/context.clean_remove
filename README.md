@@ -39,5 +39,6 @@ Installation
  
 Release history
 ---------------
+  * 6.0.0 Kodi 19
   * 1.0.2 Update to Kodi 18
   * 1.0.1 Initial release
