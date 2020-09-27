@@ -1,8 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="context.clean_remove" name="Clean Remove" version="1.0.2" provider-name="Luis Rodrigues">
-	<requires>
-		<import addon="xbmc.python" version="2.1.0"/>
-	</requires>	
+<addon id="context.clean_remove" name="Clean Remove" version="6.0.0" provider-name="Luis Rodrigues">
+
 	<extension point="kodi.context.item">
 		<menu id="kodi.core.main">
 			<item library="addon.py">
