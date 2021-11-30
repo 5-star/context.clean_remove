@@ -42,12 +42,12 @@ def deleteDir(dir):
 
 def deleteVideo(path, video):
 	deleteFile(path + video)
-        filename = os.path.splitext(video)[0]
+	filename = os.path.splitext(video)[0]
 	filebase = path + filename
-        xdir, xfil = xbmcvfs.listdir(path)
-        for fl in xfil:
-            if re.match(re.escape(filename) + "\.[a-z]{2}\.srt$", fl):
-	        xbmcvfs.delete(path + fl)
+	xdir, xfil = xbmcvfs.listdir(path)
+	for fl in xfil:
+		if re.match(re.escape(filename) + "\.[a-z]{2}\.srt$", fl):
+			xbmcvfs.delete(path + fl)
 	deleteFile(filebase + ".srt")
 	deleteFile(filebase + ".nfo")
 	deleteFile(filebase + ".jpg")
