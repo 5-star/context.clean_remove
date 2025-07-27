@@ -1,10 +1,6 @@
 msgid ""
 msgstr ""
 
-msgctxt "#30000"
-msgid "General"
-msgstr ""
-
 msgctxt "#30001"
 msgid "Clean Remove"
 msgstr ""
@@ -30,9 +26,5 @@ msgid "Clean Remove (it can not be undone!)"
 msgstr ""
 
 msgctxt "#30007"
-msgid "Movies in separate folders"
-msgstr ""
-
-msgctxt "#30008"
-msgid "Remove empty folders"
+msgid "Remove empty folder"
 msgstr ""
