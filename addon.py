@@ -45,7 +45,7 @@ def deleteFiles(video):
 		deleteDir(path)
 	else:
 		# Remove files which names start same as video file name.
-		pattern = os.path.join(path, filename + '*')
+		pattern = os.path.join(path, glob.escape(filename) + '*')
 		files = glob.glob(pattern)
 		for file in files:
 			xbmcvfs.delete(file)
