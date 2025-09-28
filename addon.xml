@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="context.clean_remove" name="Clean Remove" version="7.0.0" provider-name="Luis Rodrigues">
+<addon id="context.clean_remove" name="Clean Remove" version="7.1.0" provider-name="Luis Rodrigues">
 	<extension point="kodi.context.item">
 		<menu id="kodi.core.main">
 			<item library="addon.py">
