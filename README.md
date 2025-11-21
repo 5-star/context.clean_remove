@@ -23,6 +23,7 @@ Installation
  
 Release history
 ---------------
+  * 7.2.0 Fix lithuanian translation. Add confirm setting.
   * 7.1.0 Fix open the parent folder. Fix delete empty folder.
   * 7.0.0 Fix. Add Lithuanian translation.
   * 6.0.0 Kodi 19

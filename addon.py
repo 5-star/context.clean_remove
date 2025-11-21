@@ -11,7 +11,8 @@ import xbmcvfs
 addon = xbmcaddon.Addon()
 lang = addon.getLocalizedString
 path=xbmc.getInfoLabel('ListItem.Path')
-remove_empty = addon.getSetting('remove_empty')
+remove_empty_folder = addon.getSetting('remove_empty_folder')
+confirm = addon.getSetting('confirm')
 
 def kodiJsonRequest(params):
 	data = json.dumps(params)
@@ -48,12 +49,17 @@ def deleteFiles(video):
 		for file in files:
 			xbmcvfs.delete(file)
 		# Remove empty folder.
-		if remove_empty == "true":
+		if remove_empty_folder == "true":
 			if len(os.listdir(path))==0:
 				deleteDir(path)
 
-video=xbmc.getInfoLabel('ListItem.FileName')
-if xbmcgui.Dialog().yesno(lang(30006),xbmc.getInfoLabel('ListItem.Label')):
+def cleanRemove():
+	video=xbmc.getInfoLabel('ListItem.FileName')
+	if video!='':
+		deleteFiles(video)
+	else:
+		deleteDir(xbmc.getInfoLabel('Container.ListItem.FileNameAndPath'))
+
 	if xbmc.getInfoLabel('Container.Content')=='files':
 		xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30005) + ')')
 	else:
@@ -71,9 +77,10 @@ if xbmcgui.Dialog().yesno(lang(30006),xbmc.getInfoLabel('ListItem.Label')):
 				kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMusicVideo', 'params': {'musicvideoid': int(id)}, 'id': 1})
 				xbmc.executebuiltin('Notification(' + xbmc.getInfoLabel('ListItem.Label').replace(",",";") + ',' + lang(30004) + ')')
 
-	if video!='':
-		deleteFiles(video)
-	else:
-		deleteDir(xbmc.getInfoLabel('Container.ListItem.FileNameAndPath'))
+	xbmc.executebuiltin('Container.Refresh')
 
-xbmc.executebuiltin('Container.Refresh')
+if confirm == "true":
+	if xbmcgui.Dialog().yesno(lang(30006), xbmc.getInfoLabel('ListItem.Label')):
+		cleanRemove()
+else:
+	cleanRemove()
