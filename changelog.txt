@@ -1,6 +1,7 @@
-[B]7.2.0[/B] - Add confirm setting. Add lithuanian translation. 
-[B]7.1.0[/B] - Add open the parent folder. Fix delete empty folder.
-[B]7.0.0[/B] - Fix.
+[B]7.3.0[/B] - Add: delete form favourites.
+[B]7.2.0[/B] - Add: confirm setting. Add: lithuanian translation.
+[B]7.1.0[/B] - Add: open the parent folder. Fix delete empty folder.
+[B]7.0.0[/B] - Fix: remove files whose names begin same as the media file.
 [B]6.1.0[/B] - Kodi 20
 [B]6.0.0[/B] - Kodi 19
 [B]1.0.2[/B] - Update to Kodi 18
