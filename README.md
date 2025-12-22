@@ -25,7 +25,7 @@ Installation
  
 Release history
 ---------------
-  * 7.3.0 Add delete form favourites.
+  * 7.3.0 Add delete from favourites.
   * 7.2.0 Fix lithuanian translation. Add confirm setting.
   * 7.1.0 Fix open the parent folder. Fix delete empty folder.
   * 7.0.0 Fix. Add Lithuanian translation.
