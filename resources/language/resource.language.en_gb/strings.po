@@ -32,3 +32,7 @@ msgstr ""
 msgctxt "#30008"
 msgid "Confirm before removing"
 msgstr ""
+
+msgctxt "#30009"
+msgid "TV Show Deleted"
+msgstr ""
