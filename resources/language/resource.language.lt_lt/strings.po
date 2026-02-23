@@ -3,40 +3,40 @@ msgstr ""
 
 msgctxt "#30001"
 msgid "Clean Remove"
-msgstr ""
+msgstr "Ištrinti"
 
 msgctxt "#30002"
 msgid "Movie Deleted"
-msgstr ""
+msgstr "Ištrintas filmas"
 
 msgctxt "#30003"
 msgid "Episode Deleted"
-msgstr ""
+msgstr "Ištrintas epizodas"
 
 msgctxt "#30004"
 msgid "Music Video Deleted"
-msgstr ""
+msgstr "Ištrintas vaizdo klipas"
 
 msgctxt "#30005"
 msgid "File Deleted"
-msgstr ""
+msgstr "Ištrintas failas"
 
 msgctxt "#30006"
 msgid "Clean Remove (it can not be undone!)"
-msgstr ""
+msgstr "Trynimas neatstatomas!"
 
 msgctxt "#30007"
 msgid "Remove empty folder"
-msgstr ""
+msgstr "Ištrinti tuščią katalogą"
 
 msgctxt "#30008"
 msgid "Confirm before removing"
-msgstr ""
+msgstr "Patvirtinti prieš trynimą."
 
 msgctxt "#30009"
 msgid "TV Show Deleted"
-msgstr ""
+msgstr "Ištrintas serijalas"
 
 msgctxt "#30010"
 msgid "Folder Deleted"
-msgstr ""
+msgstr "Ištrintas katalogas"

@@ -1,29 +1,22 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<addon id="context.clean_remove" name="Clean Remove" version="6.1.0" provider-name="Luis Rodrigues">
+<addon id="context.clean_remove" name="Clean Remove" version="7.5.0" provider-name="Luis Rodrigues">
 	<extension point="kodi.context.item">
 		<menu id="kodi.core.main">
 			<item library="addon.py">
 				<label>30001</label>
-				<visible>String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,musicvideo) | String.IsEqual(Container.Content,files)</visible>
+				<visible>String.IsEqual(ListItem.dbtype,movie) | String.IsEqual(ListItem.dbtype,tvshow) | String.IsEqual(ListItem.dbtype,episode) | String.IsEqual(ListItem.dbtype,musicvideo) | String.IsEqual(Container.Content,files)</visible>
 			</item>
 		</menu>
 	</extension>
 	<extension point="xbmc.addon.metadata">
 		<summary lang="en_GB">Clean Remove</summary>
-		<summary lang="en_US">Clean Remove</summary>
-		<summary lang="en_AU">Clean Remove</summary>
-		<summary lang="en_NZ">Clean Remove</summary>
+		<summary lang="lt_LT">Pilnai Pašalinti</summary>
 		<description lang="en_GB">Removes item from library and disk, together with fanart and subtitles. No more orphan files left behind after Remove from library</description>
-		<description lang="en_US">Removes item from library and disk, together with fanart and subtitles. No more orphan files left behind after Remove from library</description>
-		<description lang="en_NZ">Removes item from library and disk, together with fanart and subtitles. No more orphan files left behind after Remove from library</description>
-		<description lang="en_AU">Removes item from library and disk, together with fanart and subtitles. No more orphan files left behind after Remove from library</description>
 		<disclaimer lang="en_GB"></disclaimer>
+		<description lang="lt_LT">Ištrina iš bibliotekos ir disko ne tik video failus, bet ir plakatus su subtitrais. Nebelieka pašalinių failų po trynimo.</description>
 		<language></language>
 		<platform>all</platform>
 		<license>GNU GENERAL PUBLIC LICENSE Version 3, 29 June 2007</license>
-		<forum></forum>
-		<website></website>
-		<email></email>
 		<source>https://github.com/5-star/context.clean_remove</source>
 		<assets>
 			<icon>icon.png</icon>
