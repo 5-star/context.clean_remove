@@ -11,13 +11,10 @@ It will work well only if you kept the default naming terminology and paths for 
 
 For media types such as movies, episodes, music videos, and videos, this will remove files whose names begin same as the media file. Other files or folders in the same directory will remain unaffected. But if folder name match the file name then deletes folder.
 
-Kodi does not provide any API / builtin or JSON-RPC method to remove favourite item. Firstly use "Clean remove" context menu item to remove files / folders and database entries, then remove empty favourite item using kodi context menu item "Remove".
-
-Optionally, if it was the last episode it will remove TV Show from kodi library (not TV Show folder).
+Kodi does not provide any API / builtin or JSON-RPC method to remove favourite item. Firstly use "Clean remove" context menu item to remove files / folders and library entries, then remove empty favourite item using kodi context menu item "Remove".
 
 Installation
 ------------
-
  - Download the add-on as a ZIP file from the top of this page
  - Open Kodi
  - Go to `System -> Settings -> Add-ons -> Install from zip file`
@@ -25,6 +22,7 @@ Installation
  
 Release history
 ---------------
+  * 7.5.0 Add delete Thumbnails.
   * 7.4.0 Add delete TV Shows.
   * 7.3.0 Add delete form favourites.
   * 7.2.0 Fix lithuanian translation. Add confirm setting.

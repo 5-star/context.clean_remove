@@ -18,7 +18,7 @@ msgid "Music Video Deleted"
 msgstr ""
 
 msgctxt "#30005"
-msgid "Video Deleted"
+msgid "File Deleted"
 msgstr ""
 
 msgctxt "#30006"
@@ -35,4 +35,8 @@ msgstr ""
 
 msgctxt "#30009"
 msgid "TV Show Deleted"
+msgstr ""
+
+msgctxt "#30010"
+msgid "Folder Deleted"
 msgstr ""

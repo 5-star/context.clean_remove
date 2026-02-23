@@ -18,7 +18,7 @@ msgid "Music Video Deleted"
 msgstr "Ištrintas vaizdo klipas"
 
 msgctxt "#30005"
-msgid "Video Deleted"
+msgid "File Deleted"
 msgstr "Ištrintas failas"
 
 msgctxt "#30006"
@@ -36,3 +36,7 @@ msgstr "Patvirtinti prieš trynimą."
 msgctxt "#30009"
 msgid "TV Show Deleted"
 msgstr "Ištrintas serijalas"
+
+msgctxt "#30010"
+msgid "Folder Deleted"
+msgstr "Ištrintas katalogas"
