@@ -48,7 +48,6 @@ def deleteThumbnails(path):
 		with textures13_connection:
 			textures13_connection.execute("DELETE FROM texture WHERE url LIKE ? OR url LIKE ?", (path, url))
 			textures13_connection.execute("DELETE FROM path WHERE url LIKE ? OR url LIKE ?", (path, url))
-			textures13_connection.commit()
 	else:
 		xbmc.log(u'Clean Remove did not find any thumbnail FROM texture WHERE url LIKE %s OR url LIKE %s' % (path, url), level=xbmc.LOGERROR)
 	textures13_connection.close()
@@ -144,7 +143,7 @@ def cleanRemove():
 			elif media_type=='episode':
 				kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveEpisode', 'params': {'episodeid': int(id)}, 'id': 1})
 				xbmc.executebuiltin('Notification('+xbmc.getInfoLabel('ListItem.Label').replace(",",";")+','+language(30003)+')')
-				xbmc.log(u'Clean Remove episode from library '+xbmc.getInfoLabel('ListItem.Label')., level=xbmc.LOGINFO)
+				xbmc.log(u'Clean Remove episode from library '+xbmc.getInfoLabel('ListItem.Label'), level=xbmc.LOGINFO)
 			elif media_type=='musicvideo':
 				kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMusicVideo', 'params': {'musicvideoid': int(id)}, 'id': 1})
 				xbmc.executebuiltin('Notification('+xbmc.getInfoLabel('ListItem.Label').replace(",",";")+','+language(30004)+')')
