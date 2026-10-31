@@ -57,9 +57,9 @@ def deleteDirectory(directory):
 	if directory==xbmc.getInfoLabel('Container.FolderPath'):
 		xbmc.executebuiltin("Action(Back)")
 
-	deleteThumbnails(directory)
 	xbmcvfs.rmdir(directory, force=True)
 	xbmc.log(u'Clean Remove %s' % directory, level=xbmc.LOGINFO)
+	deleteThumbnails(directory)
 
 def deleteFiles(file_name):
 	file_name=os.path.splitext(file_name)[0] # File name without extension.
@@ -69,13 +69,14 @@ def deleteFiles(file_name):
 	else:
 		# Remove files which names start same as video file name.
 		files=os.path.join(path, file_name)
-		deleteThumbnails(files)
+		ThumbnailsFiles=files
 		files=glob.escape(files)
 		files=glob.glob(files+"*")
 		if files:
 			for file in files:
 				xbmc.log(u'Clean Remove %s' % file, level=xbmc.LOGINFO)
 				xbmcvfs.delete(file)
+			deleteThumbnails(ThumbnailsFiles)
 
 		# Remove empty folder.
 		if addon.getSetting('remove_empty_folder')=="true":
@@ -105,58 +106,64 @@ def cleanRemove():
 		file_name=xbmc.getInfoLabel('ListItem.FileName')
 		favourite=None
 
-	file_name_and_path=xbmc.getInfoLabel('ListItem.FileNameAndPath')
+	# Get item info labels before file deletion
+	FileNameAndPath=xbmc.getInfoLabel('ListItem.FileNameAndPath')
+	ListItemLabel=xbmc.getInfoLabel('ListItem.Label')
+	ListItemDBID=xbmc.getInfoLabel('ListItem.DBID')
+	ListItemDBTYPE=xbmc.getInfoLabel('ListItem.DBTYPE')
+	ContainerContent=xbmc.getInfoLabel('Container.Content')
 
+	# Delete files and directory
 	if file_name:
 		xbmc.log(u'Clean Remove deleting file: '+file_name, level=xbmc.LOGDEBUG)
 		deleteFiles(file_name)
-	elif file_name_and_path:
-		path=file_name_and_path
+	elif FileNameAndPath:
+		path=FileNameAndPath
 		xbmc.log(u'Clean Remove deleting file name and path: '+path, level=xbmc.LOGDEBUG)
 		deleteDirectory(path)
 	else:
 		xbmc.log(u'Clean Remove deleting path: '+path, level=xbmc.LOGDEBUG)
 		deleteDirectory(path)
 
-	if xbmc.getInfoLabel('Container.Content')=='files':
+	# Delete from video library
+	if ContainerContent=='files':
 		if file_name:
-			xbmc.executebuiltin('Notification('+xbmc.getInfoLabel('ListItem.Label').replace(",",";")+','+language(30005)+')')
+			xbmc.executebuiltin('Notification('+ListItemLabel.replace(",",";")+','+language(30005)+')')
 		else:
 			xbmc.executebuiltin('Notification('+os.path.basename(os.path.dirname(path)).replace(",",";")+','+language(30010)+')')
 	else:
 		if favourite:
 			id=int(favourite["id"])
-		elif xbmc.getInfoLabel('ListItem.DBID'):
-			id=int(xbmc.getInfoLabel('ListItem.DBID'))
+		elif ListItemDBID:
+			id=int(ListItemDBID)
 		else:
 			id=0
 
-		if id < 0: id=int(xbmc.getInfoLabel('ListItem.Top250'));
 		if id > 0:
 			if favourite:
 				media_type=favourite["type"]
 			else:
-				media_type=xbmc.getInfoLabel('ListItem.DBTYPE')
+				media_type=ListItemDBTYPE
 
 			if media_type=='movie':
 				kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMovie', 'params': {'movieid': int(id)}, 'id': 1})
-				xbmc.executebuiltin('Notification('+xbmc.getInfoLabel('ListItem.Label').replace(",",";")+','+language(30002)+')')
-				xbmc.log(u'Clean Remove movie from library '+xbmc.getInfoLabel('ListItem.Label'), level=xbmc.LOGINFO)
+				xbmc.executebuiltin('Notification('+ListItemLabel.replace(",",";")+','+language(30002)+')')
+				xbmc.log(u'Clean Remove movie from library '+ListItemLabel, level=xbmc.LOGINFO)
 			elif media_type=='episode':
 				kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveEpisode', 'params': {'episodeid': int(id)}, 'id': 1})
-				xbmc.executebuiltin('Notification('+xbmc.getInfoLabel('ListItem.Label').replace(",",";")+','+language(30003)+')')
-				xbmc.log(u'Clean Remove episode from library '+xbmc.getInfoLabel('ListItem.Label'), level=xbmc.LOGINFO)
+				xbmc.executebuiltin('Notification('+ListItemLabel.replace(",",";")+','+language(30003)+')')
+				xbmc.log(u'Clean Remove episode from library '+ListItemLabel, level=xbmc.LOGINFO)
 			elif media_type=='musicvideo':
 				kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveMusicVideo', 'params': {'musicvideoid': int(id)}, 'id': 1})
-				xbmc.executebuiltin('Notification('+xbmc.getInfoLabel('ListItem.Label').replace(",",";")+','+language(30004)+')')
-				xbmc.log(u'Clean Remove music video from library '+xbmc.getInfoLabel('ListItem.Label'), level=xbmc.LOGINFO)
+				xbmc.executebuiltin('Notification('+ListItemLabel.replace(",",";")+','+language(30004)+')')
+				xbmc.log(u'Clean Remove music video from library '+ListItemLabel, level=xbmc.LOGINFO)
 			elif media_type=='tvshow':
 				kodiJsonRequest({'jsonrpc': '2.0', 'method': 'VideoLibrary.RemoveTVShow', 'params': {'tvshowid': int(id)}, 'id': 1})
-				xbmc.executebuiltin('Notification('+xbmc.getInfoLabel('ListItem.Label').replace(",",";")+','+language(30009)+')')
-				xbmc.log(u'Clean Remove TV show from library '+xbmc.getInfoLabel('ListItem.Label'), level=xbmc.LOGINFO)
+				xbmc.executebuiltin('Notification('+ListItemLabel.replace(",",";")+','+language(30009)+')')
+				xbmc.log(u'Clean Remove TV show from library '+ListItemLabel, level=xbmc.LOGINFO)
 
 if addon.getSetting('confirm')=="true":
-	if xbmcgui.Dialog().yesno(language(30006), xbmc.getInfoLabel('ListItem.Label')):
+	if xbmcgui.Dialog().yesno(language(30006), ListItemLabel):
 		cleanRemove()
 else:
 	cleanRemove()
