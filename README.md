@@ -22,6 +22,7 @@ Installation
  
 Release history
 ---------------
+  * 7.5.0 Fix: file and folder deletion.
   * 7.5.0 Add delete Thumbnails.
   * 7.4.0 Add delete TV Shows.
   * 7.3.0 Add delete form favourites.

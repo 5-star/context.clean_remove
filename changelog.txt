@@ -1,3 +1,4 @@
+[B]7.5.1[/B] - Fix: file and folder deletion.
 [B]7.5.0[/B] - Add: delete Thumbnails.
 [B]7.4.0[/B] - Add: delete TV Shows.
 [B]7.3.0[/B] - Add: delete from favourites.
